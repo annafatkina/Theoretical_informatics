@@ -38,7 +38,7 @@ namespace LanguagesSharp
                 {
                     int tmp = CurrentString.IndexOfAny((" ,.0123456789/<>!-&?@").ToCharArray(), i);     // Находим символ, не принадлежащий слову
                     currentLength = tmp - i;
-                    tmpStr = CurrentString.Substring(i, currentLength);         // Извлекаем слово
+                    tmpStr = CurrentString.Substring(i, currentLength).ToLower();         // Извлекаем слово
                     if (tmpStr.Length != 0)
                     {
                         IdentWord CurrentWord = new IdentWord(tmpStr, currentLang);
@@ -75,7 +75,7 @@ namespace LanguagesSharp
             // Обработка тестового файла
 
             StreamReader inTest = File.OpenText("test.txt");
-            StreamWriter Result = new StreamWriter("Result.txt");
+            StreamWriter Result = new StreamWriter("newResult.txt");
 
             CurrentString = null;
             while ((CurrentString = inTest.ReadLine()) != null)
@@ -88,7 +88,7 @@ namespace LanguagesSharp
                 {
                     int tmp = CurrentString.IndexOfAny((" ,.0123456789/<>!-&?@№;%:()|\\+^#$`~").ToCharArray(), i);
                     currentLength = tmp - i;
-                    tmpStr = CurrentString.Substring(i, currentLength);
+                    tmpStr = CurrentString.Substring(i, currentLength).ToLower();
                     if (tmpStr.Length != 0)
                     {
                         int idOfWord = BareWords.TakeWhile(w => w != tmpStr).Count();   // Вычисляем позицию, в которой находится в словаре текущее слово
